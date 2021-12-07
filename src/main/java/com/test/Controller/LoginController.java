@@ -27,5 +27,4 @@ public class LoginController {
         return userService.getByEmailAndPassword(email,password);
     }
 
-
 }

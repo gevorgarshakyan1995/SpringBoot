@@ -19,7 +19,6 @@ public class MailSender {
     @Value("${spring.mail.username}")
     private String from;
 
-
     public void sendSimpleMessage(String to, String subject, String email) throws MessagingException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
