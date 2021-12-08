@@ -3,9 +3,11 @@ package com.test.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -22,7 +24,7 @@ public class MailSender {
     public void sendSimpleMessage(String to, String subject, String email) throws MessagingException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-        String htmlMsg = "VERIFLED\n"+"\n"+"\n"+
+        String htmlMsg = "VERIFLED\n" + "\n" + "\n" +
                 "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -30,7 +32,7 @@ public class MailSender {
                 "       <title>Title</title>\n" +
                 "    </head>\n" +
                 "<body>\n" +
-                "<form action = \"http://localhost:8080/user/verify?email="+email+"\"  method = \"POST\" >\n" +
+                "<form action = \"http://localhost:8080/user/verify?email=" + email + "\"  method = \"POST\" >\n" +
                 "\n" +
                 "        <input type = \"submit\" value = \"VERIFLED\" />\n" +
                 "    </form>\n" +
@@ -45,4 +47,14 @@ public class MailSender {
 
 
     }
+
+    public void tokenSimpleMessage(String to, String subject, String token) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(token);
+        emailSender.send(message);
+    }
+
 }

@@ -33,6 +33,9 @@ public class User {
     @Column(name = "user_status")
     private Status status;
 
+    @Column(name = "reset_password_token", unique = true)
+    private String ResetPasswordToken;
+
 
     @ManyToOne
     @JoinColumn
@@ -48,7 +51,7 @@ public class User {
     @JoinTable(name = "user_authoriti",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "authoriti_id"))
-    private List<Authority>  authoriti;
+    private List<Authority> authoriti;
 
     public User() {
     }
@@ -57,6 +60,14 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public String getResetPasswordToken() {
+        return ResetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        ResetPasswordToken = resetPasswordToken;
     }
 
     public void setAuthoriti(List<Authority> authoriti) {

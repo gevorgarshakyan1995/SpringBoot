@@ -26,4 +26,8 @@ public interface UserService {
     void verified(String Email) throws NotFoundException;
 
     public void sendemail(String email, String subject, String text);
+
+    void ResetPasswordToken(String email) throws NotFoundException;
+
+    User ResetPassword(String token, String password) throws NotFoundException;
 }

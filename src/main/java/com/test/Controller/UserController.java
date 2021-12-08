@@ -6,6 +6,7 @@ import com.test.Model.User;
 import com.test.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class UserController {
 
     @RolesAllowed(value = "ROLE_ADMIN")
     @GetMapping("{id}")
-     User getById(@PathVariable int id) throws NotFoundException {
+    User getById(@PathVariable int id) throws NotFoundException {
         return userService.getById(id);
     }
 
@@ -60,16 +61,27 @@ public class UserController {
 
     @PostMapping
     void save(@RequestBody User user) throws NotFoundException {
-      userService.save(user);
+        userService.save(user);
     }
+
     @PostMapping("/verify")
     void verified(@RequestParam("email") String email) throws NotFoundException {
         userService.verified(email);
     }
+
     @PostMapping("/send-email")
     void sendemail(@RequestParam("email") String toEmail, @RequestParam("subject") String subject, @RequestParam("email") String email) {
-        userService.sendemail(toEmail, subject,email);
+        userService.sendemail(toEmail, subject, email);
     }
 
+    @PostMapping("/reset-password")
+    void ResetPasswordToken(@RequestParam("email") String Email) throws NotFoundException {
+        userService.ResetPasswordToken(Email);
+    }
+
+    @PutMapping("/reset-password")
+    public User ResetPassword(@RequestParam("token") String token, @RequestParam("password") String password) throws NotFoundException {
+        return userService.ResetPassword(token, password);
+    }
 }
 

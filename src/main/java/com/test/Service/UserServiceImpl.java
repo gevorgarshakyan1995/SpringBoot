@@ -5,6 +5,7 @@ import com.test.Model.Address;
 import com.test.Model.Status;
 import com.test.Model.User;
 import com.test.Repository.UserRepository;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -125,5 +126,28 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void ResetPasswordToken(String email) throws NotFoundException {
+        User user = getBYEmail(email);
+        String token = RandomString.make(10);
+        user.setResetPasswordToken(token);
+        userRepository.save(user);
+        mailSender.tokenSimpleMessage("gevorgarshkyan1995@gmail.com", "Reset Password", token);
+    }
+
+    @Override
+    public User ResetPassword(String token, String password) throws NotFoundException {
+        User user = userRepository.getByResetPasswordToken(token);
+        if (user == null) {
+            throw new NotFoundException();
+        }
+        String encodedPassword = passwordEncoder.encode(password);
+        user.setPassword(encodedPassword);
+        user.setResetPasswordToken(null);
+        userRepository.save(user);
+        return user;
+    }
+
 
 }
