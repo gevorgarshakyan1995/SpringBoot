@@ -36,6 +36,8 @@ public class User {
     @Column(name = "reset_password_token", unique = true)
     private String ResetPasswordToken;
 
+    @Column(name = "reset_password_token_req_age")
+    private Long timeMillis;
 
     @ManyToOne
     @JoinColumn
@@ -140,6 +142,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public long getTimeMillis() {
+        return timeMillis;
+    }
+
+    public void setTimeMillis(Long timeMillis) {
+        this.timeMillis = timeMillis;
     }
 
     @Override
