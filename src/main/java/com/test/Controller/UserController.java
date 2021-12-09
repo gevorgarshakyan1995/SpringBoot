@@ -22,8 +22,8 @@ public class UserController {
 
     @RolesAllowed(value = "ROLE_USER")
     @GetMapping
-    List<User> getAll() {
-        return userService.getall();
+    List<User> getAll(@RequestParam("email") String email) throws NotFoundException {
+        return userService.getall(email);
     }
 
     @RolesAllowed(value = "ROLE_ADMIN")

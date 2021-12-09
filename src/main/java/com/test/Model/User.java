@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -43,8 +44,7 @@ public class User {
     private Long timeMillis;
 
     @Column
-    @Temporal(TemporalType.DATE)
-    private java.util.Date age;
+    private LocalDate birthday;
 
     @ManyToOne
     @JoinColumn
@@ -71,12 +71,12 @@ public class User {
         this.password = password;
     }
 
-    public Date getAge() {
-        return age;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setAge(Date age) {
-        this.age = age;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public String getResetPasswordToken() {
@@ -159,7 +159,7 @@ public class User {
         this.password = password;
     }
 
-    public long getTimeMillis() {
+    public Long getTimeMillis() {
         return timeMillis;
     }
 

@@ -7,18 +7,15 @@ import com.test.Model.User;
 import com.test.Repository.UserRepository;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 
 @Service
@@ -41,8 +38,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getall() {
-        return userRepository.findAll();
+    public List<User> getall(String email) throws NotFoundException {
+        User user = getBYEmail(email);
+        LocalDate date = LocalDate.now();
+        LocalDate date1 = user.getBirthday(); //user birthday
+        long elapsedDays = ChronoUnit.DAYS.between(date1, date);
+        if (elapsedDays > 6574) {
+            return userRepository.findAll();
+
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -138,7 +144,7 @@ public class UserServiceImpl implements UserService {
     public void ResetPasswordToken(String email) throws NotFoundException {
         User user = getBYEmail(email);
         String token = RandomString.make(10);
-        Long timeMillis =System.currentTimeMillis();
+        Long timeMillis = System.currentTimeMillis();
         user.setTimeMillis(timeMillis);
         user.setResetPasswordToken(token);
         userRepository.save(user);
@@ -152,7 +158,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new NotFoundException();
         }
-        Long timeMillis =System.currentTimeMillis();
+        Long timeMillis = System.currentTimeMillis();
         Long time = timeMillis - user.getTimeMillis();
         if (time < 120000) {
             String encodedPassword = passwordEncoder.encode(password);
@@ -160,7 +166,7 @@ public class UserServiceImpl implements UserService {
             user.setResetPasswordToken(null);
             user.setTimeMillis(null);
             userRepository.save(user);
-        }else {
+        } else {
             user.setResetPasswordToken(null);
             user.setTimeMillis(null);
             throw new NotFoundException();
