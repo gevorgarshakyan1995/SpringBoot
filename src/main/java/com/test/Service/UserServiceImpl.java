@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -130,7 +134,6 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    @Async
     @Transactional
     public void ResetPasswordToken(String email) throws NotFoundException {
         User user = getBYEmail(email);
@@ -165,4 +168,19 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+    public static void main(String[] args) {
+        DateFormat Date = DateFormat.getDateInstance();
+        Calendar cals = Calendar.getInstance();
+//Displaying the actual date
+        System.out.println("The original Date: " + cals.getTime());
+//Using format() method for conversion
+        String currentDate = Date.format(cals.getTime());
+        System.out.println("Formatted Date: " + currentDate);
+        java.util.Date date = new Date();
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        String stringDate= DateFor.format(date);
+        System.out.println(stringDate);
+    }
+
 }

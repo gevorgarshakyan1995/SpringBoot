@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,6 +40,10 @@ public class User {
     @Column(name = "reset_password_token_req_age")
     private Long timeMillis;
 
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date purchaseDate;
+
     @ManyToOne
     @JoinColumn
     private Address address;
@@ -62,6 +67,14 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
     public String getResetPasswordToken() {
