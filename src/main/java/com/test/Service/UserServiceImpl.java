@@ -169,18 +169,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public static void main(String[] args) {
-        DateFormat Date = DateFormat.getDateInstance();
-        Calendar cals = Calendar.getInstance();
-//Displaying the actual date
-        System.out.println("The original Date: " + cals.getTime());
-//Using format() method for conversion
-        String currentDate = Date.format(cals.getTime());
-        System.out.println("Formatted Date: " + currentDate);
-        java.util.Date date = new Date();
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-        String stringDate= DateFor.format(date);
-        System.out.println(stringDate);
-    }
+
+
 
 }
