@@ -1,11 +1,13 @@
 package com.test.Model;
 
+import sun.util.calendar.LocalGregorianCalendar;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,7 +44,7 @@ public class User {
 
     @Column
     @Temporal(TemporalType.DATE)
-    private Date purchaseDate;
+    private java.util.Date age;
 
     @ManyToOne
     @JoinColumn
@@ -69,12 +71,12 @@ public class User {
         this.password = password;
     }
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
+    public Date getAge() {
+        return age;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setAge(Date age) {
+        this.age = age;
     }
 
     public String getResetPasswordToken() {
@@ -163,19 +165,6 @@ public class User {
 
     public void setTimeMillis(Long timeMillis) {
         this.timeMillis = timeMillis;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, email, password);
     }
 
     @Override
