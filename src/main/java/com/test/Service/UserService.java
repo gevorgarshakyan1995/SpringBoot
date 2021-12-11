@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    public List<User> getall();
+    public List<User> getall(String email) throws NotFoundException;
 
     public void save(User users) throws NotFoundException;
 

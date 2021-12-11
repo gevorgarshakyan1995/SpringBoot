@@ -1,10 +1,14 @@
 package com.test.Model;
 
+import sun.util.calendar.LocalGregorianCalendar;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,6 +43,9 @@ public class User {
     @Column(name = "reset_password_token_req_age")
     private Long timeMillis;
 
+    @Column
+    private LocalDate birthday;
+
     @ManyToOne
     @JoinColumn
     private Address address;
@@ -62,6 +69,14 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public String getResetPasswordToken() {
@@ -144,25 +159,12 @@ public class User {
         this.password = password;
     }
 
-    public long getTimeMillis() {
+    public Long getTimeMillis() {
         return timeMillis;
     }
 
     public void setTimeMillis(Long timeMillis) {
         this.timeMillis = timeMillis;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, email, password);
     }
 
     @Override
