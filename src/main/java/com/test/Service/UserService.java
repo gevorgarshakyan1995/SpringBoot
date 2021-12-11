@@ -3,11 +3,12 @@ package com.test.Service;
 import com.test.Execpton.NotFoundException;
 import com.test.Model.User;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserService {
 
-    public List<User> getall(String email) throws NotFoundException;
+    public List<User> getall(Principal principal) throws NotFoundException;
 
     public void save(User users) throws NotFoundException;
 
