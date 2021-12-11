@@ -7,12 +7,10 @@ import com.test.Model.User;
 import com.test.Repository.UserRepository;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -36,10 +34,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MailSender mailSender;
 
-
     @Override
-    public List<User> getall(String email) throws NotFoundException {
-        User user = getBYEmail(email);
+    public List<User> getall(Principal principal) throws NotFoundException {
+
+        User user =userRepository.getByEmail(principal.getName());
         LocalDate date = LocalDate.now();
         LocalDate date1 = user.getBirthday(); //user birthday
         long elapsedDays = ChronoUnit.DAYS.between(date1, date);

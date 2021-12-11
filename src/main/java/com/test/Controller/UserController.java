@@ -6,8 +6,8 @@ import com.test.Model.User;
 import com.test.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.security.RolesAllowed;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -22,8 +22,8 @@ public class UserController {
 
     @RolesAllowed(value = "ROLE_USER")
     @GetMapping
-    List<User> getAll(@RequestParam("email") String email) throws NotFoundException {
-        return userService.getall(email);
+    List<User> getAll(Principal principal)  throws NotFoundException {
+        return userService.getall(principal);
     }
 
     @RolesAllowed(value = "ROLE_ADMIN")
