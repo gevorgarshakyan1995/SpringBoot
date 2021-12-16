@@ -1,8 +1,7 @@
 package com.test.Service;
 
-import com.test.Execpton.NotFoundException;
+import com.test.Exception.NotFoundException;
 import com.test.Model.Phone;
-import com.test.Model.User;
 import com.test.Repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
