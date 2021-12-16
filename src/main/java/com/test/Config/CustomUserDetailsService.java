@@ -1,7 +1,7 @@
 package com.test.Config;
 
 
-import com.test.Execpton.NotFoundException;
+import com.test.Exception.NotFoundException;
 import com.test.Model.Authority;
 import com.test.Model.Status;
 import com.test.Model.User;

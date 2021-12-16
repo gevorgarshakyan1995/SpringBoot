@@ -1,7 +1,7 @@
 package com.test.Controller;
 
 import com.test.Config.CustomUserDetailsService;
-import com.test.Execpton.NotFoundException;
+import com.test.Exception.NotFoundException;
 import com.test.Model.User;
 import com.test.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
