@@ -1,6 +1,6 @@
 package com.test.Controller;
 
-import com.test.Execpton.BadRequestException;
+import com.test.Exception.BadRequestException;
 import com.test.Model.Status;
 import com.test.Model.User;
 import com.test.Service.UserService;

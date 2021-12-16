@@ -1,6 +1,6 @@
 package com.test.Controller;
 
-import com.test.Execpton.NotFoundException;
+import com.test.Exception.NotFoundException;
 
 import com.test.Model.Address;
 import com.test.Service.AddresService;

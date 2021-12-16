@@ -1,6 +1,6 @@
 package com.test.Controller;
 
-import com.test.Execpton.NotFoundException;
+import com.test.Exception.NotFoundException;
 import com.test.Model.Phone;
 import com.test.Service.PhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
