@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "select u from User u where u.email = :email")
     User getByEmail(String email);
 
-    @Query(nativeQuery = true, value = "Select * from user where soundex(name)=soundex(?)") //JDBC motavor voronum maqur sql
+    @Query(nativeQuery = true, value = "Select * from user where soundex(name)=soundex(?)") 
     List<User> getAllByName (String name);
 
     User getByEmailAndPassword (String email,String password);
